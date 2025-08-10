@@ -1,0 +1,17 @@
+
+services:
+  node-ts:
+    image: rebuild:1.0
+    container_name: node_gp_monde
+    working_dir: /app
+    volumes:
+      - ./:/app
+    tty: true
+    stdin_open: true
+    networks:
+      - infra_central_net
+
+networks:
+  infra_central_net:
+    driver: bridge
+

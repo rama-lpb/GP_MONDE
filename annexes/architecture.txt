@@ -1,0 +1,24 @@
+mon-projet/
+├── public/
+│   └── index.php              # ROUTES UNIQUEMENT
+├── src/                       # Code TypeScript
+│   ├── models/
+│   │   ├── entities/
+│   │   ├── enums/
+│   │   └── dtos/
+│   ├── services/
+│   ├── repositories/
+│   ├── controllers/
+│   ├── interfaces/
+│   └── main.ts
+├── views/                     # Templates HTML
+│   ├── layout.php
+│   ├── home.php
+│   ├── 404.php
+│   └── colis/
+│       ├── index.php
+│       └── create.php
+├── data/
+├── dist/                      # Code compilé
+├── tsconfig.json
+└── package.json

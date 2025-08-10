@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP_MONDE - Gestion des Cargaisons</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary-color: #059669;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #3b82f6;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Réutilisation du style du dashboard */
+        .sidebar {
+            width: 280px;
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: var(--space-4) 0;
+        }
+
+        .nav-item {
+            margin-bottom: var(--space-1);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-6);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-right: 3px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            border-right-color: var(--primary-color);
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--space-4);
+            align-items: center;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: var(--space-6);
+            overflow-y: auto;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .filters-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+            color: var(--text-primary);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2);
+        }
+
+        .filter-input,
+        .filter-select {
+            padding: var(--space-2) var(--space-3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            background: white;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+        }
+
+        .filters-actions {
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        /* Table Section */
+        .table-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: var(--space-4);
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .data-table th {
+            background: var(--bg-color);
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        .data-table tr:hover {
+            background: var(--bg-color);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.ouvert {
+            background: rgb(16 185 129 / 0.1);
+            color: var(--success-color);
+        }
+
+        .status-badge.ferme {
+            background: rgb(239 68 68 / 0.1);
+            color: var(--error-color);
+        }
+
+        .status-badge.en-attente {
+            background: rgb(245 158 11 / 0.1);
+            color: var(--warning-color);
+        }
+
+        .status-badge.en-cours {
+            background: rgb(59 130 246 / 0.1);
+            color: var(--info-color);
+        }
+
+        .status-badge.arrive {
+            background: rgb(16 185 129 / 0.1);
+            color: var(--success-color);
+        }
+
+        .status-badge.termine {
+            background: rgb(107 114 128 / 0.1);
+            color: #6b7280;
+        }
+
+        /* Type Badges */
+        .type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .type-badge.maritime {
+            background: rgb(59 130 246 / 0.1);
+            color: var(--info-color);
+        }
+
+        .type-badge.aerienne {
+            background: rgb(139 69 19 / 0.1);
+            color: #8b4513;
+        }
+
+        .type-badge.routiere {
+            background: rgb(34 197 94 / 0.1);
+            color: #22c55e;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+
+        .action-btn.view {
+            background: rgb(59 130 246 / 0.1);
+            color: var(--info-color);
+        }
+
+        .action-btn.edit {
+            background: rgb(245 158 11 / 0.1);
+            color: var(--warning-color);
+        }
+
+        .action-btn.delete {
+            background: rgb(239 68 68 / 0.1);
+            color: var(--error-color);
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        .actions-group {
+            display: flex;
+            gap: var(--space-1);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--bg-color);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-4) var(--space-6);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .pagination-info {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .page-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Modal styles pour les actions rapides */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: var(--space-6);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-bottom: var(--space-6);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-area {
+                padding: var(--space-4);
+            }
+            
+            .header {
+                padding: var(--space-3) var(--space-4);
+            }
+            
+            .filters-section,
+            .table-header {
+                padding: var(--space-4);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>GP_MONDE</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-item">
+                    <a href="/dashboard" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cargaisons" class="nav-link active">
+                        <i class="fas fa-ship"></i>
+                        <span>Cargaisons</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/colis" class="nav-link">
+                        <i class="fas fa-box"></i>
+                        <span>Colis</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/clients" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Clients</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/suivi" class="nav-link">
+                        <i class="fas fa-search"></i>
+                        <span>Suivi Colis</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/rapports" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Rapports</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/parametres" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Paramètres</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="header-title">Gestion des Cargaisons</h1>
+                <div class="header-actions">
+                    <a href="/cargaisons/new" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Nouvelle Cargaison
+                    </a>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Filters Section -->
+                <div class="filters-section">
+                    <h3 class="filters-title">Filtres de Recherche</h3>
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label class="filter-label">Numéro de Cargaison</label>
+                            <input type="text" class="filter-input" placeholder="Ex: MAR-2024-001">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Type de Cargaison</label>
+                            <select class="filter-select">
+                                <option value="">Tous les types</option>
+                                <option value="maritime">Maritime</option>
+                                <option value="aerienne">Aérienne</option>
+                                <option value="routiere">Routière</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">État Global</label>
+                            <select class="filter-select">
+                                <option value="">Tous les états</option>
+                                <option value="ouvert">Ouvert</option>
+                                <option value="ferme">Fermé</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">État d'Avancement</label>
+                            <select class="filter-select">
+                                <option value="">Tous</option>
+                                <option value="en-attente">En Attente</option>
+                                <option value="en-cours">En Cours</option>
+                                <option value="arrive">Arrivé</option>
+                                <option value="termine">Terminé</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Lieu de Départ</label>
+                            <input type="text" class="filter-input" placeholder="Ex: Dakar">
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Lieu d'Arrivée</label>
+                            <input type="text" class="filter-input" placeholder="Ex: Paris">
+                        </div>
+                    </div>
+                    <div class="filters-actions">
+                        <button class="btn btn-primary" onclick="applyFilters()">
+                            <i class="fas fa-search"></i>
+                            Rechercher
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetFilters()">
+                            <i class="fas fa-times"></i>
+                            Réinitialiser
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table Section -->
+                <div class="table-section">
+                    <div class="table-header">
+                        <h3 class="table-title">Liste des Cargaisons</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline">
+                                <i class="fas fa-download"></i>
+                                Exporter
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Numéro</th>
+                                    <th>Type</th>
+                                    <th>Trajet</th>
+                                    <th>Poids</th>
+                                    <th>Colis</th>
+                                    <th>Prix Total</th>
+                                    <th>État Global</th>
+                                    <th>Avancement</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>MAR-2024-001</strong></td>
+                                    <td>
+                                        <span class="type-badge maritime">
+                                            <i class="fas fa-ship"></i>
+                                            Maritime
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Dakar → Marseille</strong><br>
+                                            <small class="text-secondary">4,250 km</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>2,450 kg</strong><br>
+                                            <small class="text-secondary">/ 5,000 kg</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>45</strong> colis
+                                    </td>
+                                    <td>
+                                        <strong>1,245,000 FCFA</strong>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge ferme">
+                                            <i class="fas fa-lock"></i>
+                                            Fermé
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge en-cours">
+                                            <i class="fas fa-clock"></i>
+                                            En Cours
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="actions-group">
+                                            <button class="action-btn view" onclick="viewCargaison('MAR-2024-001')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" onclick="editCargaison('MAR-2024-001')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" onclick="confirmDelete('MAR-2024-001')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AER-2024-015</strong></td>
+                                    <td>
+                                        <span class="type-badge aerienne">
+                                            <i class="fas fa-plane"></i>
+                                            Aérienne
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Dakar → Paris</strong><br>
+                                            <small class="text-secondary">4,128 km</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>890 kg</strong><br>
+                                            <small class="text-secondary">/ 1,200 kg</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>23</strong> colis
+                                    </td>
+                                    <td>
+                                        <strong>567,800 FCFA</strong>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge ouvert">
+                                            <i class="fas fa-unlock"></i>
+                                            Ouvert
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge en-attente">
+                                            <i class="fas fa-clock"></i>
+                                            En Attente
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="actions-group">
+                                            <button class="action-btn view" onclick="viewCargaison('AER-2024-015')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" onclick="editCargaison('AER-2024-015')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" onclick="confirmDelete('AER-2024-015')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ROT-2024-008</strong></td>
+                                    <td>
+                                        <span class="type-badge routiere">
+                                            <i class="fas fa-truck"></i>
+                                            Routière
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Dakar → Bamako</strong><br>
+                                            <small class="text-secondary">1,200 km</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>3,200 kg</strong><br>
+                                            <small class="text-secondary">/ 8,000 kg</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>67</strong> colis
+                                    </td>
+                                    <td>
+                                        <strong>890,500 FCFA</strong>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge ouvert">
+                                            <i class="fas fa-unlock"></i>
+                                            Ouvert
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge en-attente">
+                                            <i class="fas fa-clock"></i>
+                                            En Attente
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="actions-group">
+                                            <button class="action-btn view" onclick="viewCargaison('ROT-2024-008')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" onclick="editCargaison('ROT-2024-008')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" onclick="confirmDelete('ROT-2024-008')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MAR-2024-002</strong></td>
+                                    <td>
+                                        <span class="type-badge maritime">
+                                            <i class="fas fa-ship"></i>
+                                            Maritime
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Dakar → Le Havre</strong><br>
+                                            <small class="text-secondary">4,100 km</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>4,800 kg</strong><br>
+                                            <small class="text-secondary">/ 5,000 kg</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>89</strong> colis
+                                    </td>
+                                    <td>
+                                        <strong>2,340,000 FCFA</strong>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge ferme">
+                                            <i class="fas fa-lock"></i>
+                                            Fermé
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge arrive">
+                                            <i class="fas fa-check-circle"></i>
+                                            Arrivé
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="actions-group">
+                                            <button class="action-btn view" onclick="viewCargaison('MAR-2024-002')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" onclick="editCargaison('MAR-2024-002')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="action-btn delete" onclick="confirmDelete('MAR-2024-002')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AER-2024-016</strong></td>
+                                    <td>
+                                        <span class="type-badge aerienne">
+                                            <i class="fas fa-plane"></i>
+                                            Aérienne
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Dakar → Madrid</strong><br>
+                                            <small class="text-secondary">2,850 km</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>1,100 kg</strong><br>
+                                            <small class="text-secondary">/ 1,200 kg</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>34</strong> colis
+                                    </td>
+                                    <td>
+                                        <strong>745,600 FCFA</strong>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge ferme">
+                                            <i class="fas fa-lock"></i>
+                                            Fermé
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge termine">
+                                            <i class="fas fa-flag-checkered"></i>
+                                            Terminé
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="actions-group">
+                                            <button class="action-btn view" onclick="viewCargaison('AER-2024-016')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn edit" onclick="editCargaison('AER-2024-016')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            Affichage de 1 à 5 sur 24 cargaisons
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="page-btn" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">5</button>
+                            <button class="page-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Confirmation -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirmer la Suppression</h3>
+                <button class="modal-close" onclick="closeModal('deleteModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer cette cargaison ? Cette action est irréversible.</p>
+                <p><strong>Cargaison : </strong><span id="cargaisonToDelete"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal('deleteModal')">
+                    Annuler
+                </button>
+                <button class="btn btn-primary" onclick="deleteCargaison()">
+                    <i class="fas fa-trash"></i>
+                    Supprimer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'Actions Rapides -->
+    <div class="modal-overlay" id="actionsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Actions Rapides</h3>
+                <button class="modal-close" onclick="closeModal('actionsModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <button class="btn btn-outline" onclick="toggleCargaisonState()">
+                        <i class="fas fa-lock"></i>
+                        Fermer/Ouvrir Cargaison
+                    </button>
+                    <button class="btn btn-outline" onclick="changeAdvancementState()">
+                        <i class="fas fa-forward"></i>
+                        Changer État d'Avancement
+                    </button>
+                    <button class="btn btn-outline" onclick="generateReport()">
+                        <i class="fas fa-file-pdf"></i>
+                        Générer Rapport
+                    </button>
+                    <button class="btn btn-outline" onclick="exportColis()">
+                        <i class="fas fa-download"></i>
+                        Exporter Liste Colis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCargaison = null;
+
+        // Fonctions de filtrage
+        function applyFilters() {
+            const filters = {
+                numero: document.querySelector('.filter-input[placeholder*="MAR-2024-001"]').value,
+                type: document.querySelector('select.filter-select').value,
+                etatGlobal: document.querySelectorAll('select.filter-select')[1].value,
+                etatAvancement: document.querySelectorAll('select.filter-select')[2].value,
+                lieuDepart: document.querySelectorAll('.filter-input')[1].value,
+                lieuArrivee: document.querySelectorAll('.filter-input')[2].value
+            };
+
+            console.log('Applying filters:', filters);
+            
+            // Ici vous implémenteriez la logique de filtrage
+            // Par exemple, faire une requête AJAX vers votre API PHP
+            
+            // Simulation d'un filtrage côté client
+            filterTable(filters);
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('.filter-input').forEach(input => input.value = '');
+            document.querySelectorAll('.filter-select').forEach(select => select.selectedIndex = 0);
+            
+            // Réafficher toutes les lignes
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                row.style.display = '';
+            });
+        }
+
+        function filterTable(filters) {
+            const rows = document.querySelectorAll('.data-table tbody tr');
+            
+            rows.forEach(row => {
+                let shouldShow = true;
+                
+                // Filtrer par numéro
+                if (filters.numero) {
+                    const numero = row.querySelector('td:first-child strong').textContent;
+                    if (!numero.toLowerCase().includes(filters.numero.toLowerCase())) {
+                        shouldShow = false;
+                    }
+                }
+                
+                // Filtrer par type
+                if (filters.type) {
+                    const typeElement = row.querySelector('.type-badge');
+                    if (!typeElement.classList.contains(filters.type)) {
+                        shouldShow = false;
+                    }
+                }
+                
+                row.style.display = shouldShow ? '' : 'none';
+            });
+        }
+
+        // Actions sur les cargaisons
+        function viewCargaison(numero) {
+            window.location.href = `/cargaisons/${numero}`;
+        }
+
+        function editCargaison(numero) {
+            window.location.href = `/cargaisons/${numero}/edit`;
+        }
+
+        function confirmDelete(numero) {
+            currentCargaison = numero;
+            document.getElementById('cargaisonToDelete').textContent = numero;
+            showModal('deleteModal');
+        }
+
+        function deleteCargaison() {
+            if (currentCargaison) {
+                // Ici vous implémenteriez la suppression via API
+                console.log('Deleting cargaison:', currentCargaison);
+                
+                // Simulation de suppression réussie
+                alert(`Cargaison ${currentCargaison} supprimée avec succès`);
+                
+                // Supprimer la ligne du tableau
+                const row = Array.from(document.querySelectorAll('.data-table tbody tr'))
+                    .find(row => row.querySelector('td:first-child strong').textContent === currentCargaison);
+                if (row) {
+                    row.remove();
+                }
+                
+                closeModal('deleteModal');
+                currentCargaison = null;
+            }
+        }
+
+        // Fonctions modales
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Actions rapides
+        function toggleCargaisonState() {
+            alert('Fonction de fermeture/ouverture à implémenter');
+            closeModal('actionsModal');
+        }
+
+        function changeAdvancementState() {
+            alert('Fonction de changement d\'état à implémenter');
+            closeModal('actionsModal');
+        }
+
+        function generateReport() {
+            alert('Génération de rapport à implémenter');
+            closeModal('actionsModal');
+        }
+
+        function exportColis() {
+            alert('Export des colis à implémenter');
+            closeModal('actionsModal');
+        }
+
+        // Fermer les modales en cliquant à l'extérieur
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Navigation clavier pour les modales
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+
+        // Fonction de tri des colonnes
+        document.querySelectorAll('.data-table th').forEach(header => {
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', function() {
+                const column = Array.from(header.parentElement.children).indexOf(header);
+                sortTable(column);
+            });
+        });
+
+        function sortTable(column) {
+            const table = document.querySelector('.data-table tbody');
+            const rows = Array.from(table.rows);
+            
+            rows.sort((a, b) => {
+                const aValue = a.cells[column].textContent.trim();
+                const bValue = b.cells[column].textContent.trim();
+                
+                return aValue.localeCompare(bValue, undefined, {numeric: true});
+            });
+            
+            rows.forEach(row => table.appendChild(row));
+        }
+
+        // Auto-refresh toutes les 60 secondes
+        setInterval(() => {
+            console.log('Auto-refreshing cargaisons data...');
+            // Ici vous pourriez faire une requête AJAX pour actualiser les données
+        }, 60000);
+    </script>
+</body>
+</html>

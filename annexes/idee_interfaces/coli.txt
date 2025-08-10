@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP_MONDE - Enregistrement Colis</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <nav class="w-[280px] bg-white border-r border-gray-200 flex flex-col fixed h-screen z-50">
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center gap-3 text-2xl font-bold text-blue-800">
+                    <i class="fas fa-shipping-fast text-3xl text-blue-800"></i>
+                    <span>GP_MONDE</span>
+                </div>
+            </div>
+            <div class="flex-1 py-4">
+                <div class="mb-1">
+                    <a href="/dashboard" class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:bg-gray-50 hover:text-blue-700 border-r-4 border-transparent transition-all">
+                        <i class="fas fa-home w-5 text-center"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="mb-1">
+                    <a href="/cargaisons" class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:bg-gray-50 hover:text-blue-700 border-r-4 border-transparent transition-all">
+                        <i class="fas fa-ship w-5 text-center"></i>
+                        <span>Cargaisons</span>
+                    </a>
+                </div>
+                <div class="mb-1">
+                    <a href="/colis" class="flex items-center gap-3 px-6 py-3 text-blue-700 bg-blue-50 border-r-4 border-blue-700 font-semibold">
+                        <i class="fas fa-box w-5 text-center"></i>
+                        <span>Colis</span>
+                    </a>
+                </div>
+                <div class="mb-1">
+                    <a href="/clients" class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:bg-gray-50 hover:text-blue-700 border-r-4 border-transparent transition-all">
+                        <i class="fas fa-users w-5 text-center"></i>
+                        <span>Clients</span>
+                    </a>
+                </div>
+                <div class="mb-1">
+                    <a href="/suivi" class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:bg-gray-50 hover:text-blue-700 border-r-4 border-transparent transition-all">
+                        <i class="fas fa-search w-5 text-center"></i>
+                        <span>Suivi Colis</span>
+                    </a>
+                </div>
+                <div class="mb-1">
+                    <a href="/rapports" class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:bg-gray-50 hover:text-blue-700 border-r-4 border-transparent transition-all">
+                        <i class="fas fa-chart-bar w-5 text-center"></i>
+                        <span>Rapports</span>
+                    </a>
+                </div>
+                <div class="mb-1">
+                    <a href="/parametres" class="flex items-center gap-3 px-6 py-3 text-gray-500 hover:bg-gray-50 hover:text-blue-700 border-r-4 border-transparent transition-all">
+                        <i class="fas fa-cog w-5 text-center"></i>
+                        <span>Paramètres</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-[280px] flex flex-col">
+            <!-- Header -->
+            <header class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
+                <div>
+                    <h1 class="text-xl font-semibold text-gray-800">Enregistrement de Colis</h1>
+                    <div class="flex items-center gap-2 text-sm text-gray-500">
+                        <a href="/dashboard" class="text-blue-700 hover:underline">Dashboard</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="/colis" class="text-blue-700 hover:underline">Colis</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Nouveau</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex-1 p-6 overflow-y-auto bg-gray-50">
+                <div class="max-w-[1200px] mx-auto">
+                    <!-- Form Steps -->
+                    <div class="flex justify-center mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-blue-700 text-white">1</div>
+                            <div class="font-medium text-sm text-blue-700">Informations Client</div>
+                        </div>
+                        <div class="w-16 h-0.5 bg-gray-200 mx-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-gray-200 text-gray-400">2</div>
+                            <div class="font-medium text-sm text-gray-400">Détails Colis</div>
+                        </div>
+                        <div class="w-16 h-0.5 bg-gray-200 mx-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-gray-200 text-gray-400">3</div>
+                            <div class="font-medium text-sm text-gray-400">Destinataire</div>
+                        </div>
+                        <div class="w-16 h-0.5 bg-gray-200 mx-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-gray-200 text-gray-400">4</div>
+                            <div class="font-medium text-sm text-gray-400">Confirmation</div>
+                        </div>
+                    </div>
+
+                    <form id="colisForm">
+                        <!-- Étape 1: Informations Expéditeur -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-100 mb-6" id="step1">
+                            <div class="px-6 py-6 border-b border-gray-100">
+                                <div class="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                                    <i class="fas fa-user"></i>
+                                    Informations de l'Expéditeur
+                                </div>
+                                <div class="text-sm text-gray-500 mt-2">
+                                    Saisissez les informations complètes de la personne qui envoie le colis
+                                </div>
+                            </div>
+                            <div class="px-6 py-6">
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="expediteur_nom" required>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Ce champ est obligatoire</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="expediteur_prenom" required>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Ce champ est obligatoire</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Téléphone <span class="text-red-500">*</span></label>
+                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="expediteur_telephone" required>
+                                        <div class="text-xs text-gray-500 mt-1">Format: +221 XX XXX XX XX</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Numéro de téléphone invalide</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="email" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="expediteur_email">
+                                        <div class="text-xs text-gray-500 mt-1">Optionnel - pour les notifications</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Adresse email invalide</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4 col-span-2">
+                                        <label class="font-medium text-gray-700 mb-1">Adresse Complète <span class="text-red-500">*</span></label>
+                                        <textarea class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 min-h-[100px]" name="expediteur_adresse" required></textarea>
+                                        <div class="text-xs text-gray-500 mt-1">Adresse complète avec quartier, ville, pays</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Ce champ est obligatoire</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Étape 2: Détails Colis -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-100 mb-6" id="step2" style="display: none;">
+                            <div class="px-6 py-6 border-b border-gray-100">
+                                <div class="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                                    <i class="fas fa-box"></i>
+                                    Détails du Colis
+                                </div>
+                                <div class="text-sm text-gray-500 mt-2">
+                                    Spécifiez les caractéristiques et le contenu du colis
+                                </div>
+                            </div>
+                            <div class="px-6 py-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Nombre de Colis <span class="text-red-500">*</span></label>
+                                        <input type="number" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="nombre_colis" min="1" value="1" required>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Minimum 1 colis</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Poids Total (kg) <span class="text-red-500">*</span></label>
+                                        <input type="number" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="poids" min="0.1" step="0.1" required>
+                                        <div class="text-xs text-gray-500 mt-1">Poids en kilogrammes</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Le poids doit être supérieur à 0</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Type de Produit <span class="text-red-500">*</span></label>
+                                        <select class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="type_produit" required>
+                                            <option value="">Sélectionnez...</option>
+                                            <option value="documents">Documents</option>
+                                            <option value="vetements">Vêtements</option>
+                                            <option value="electronique">Électronique</option>
+                                            <option value="alimentaire">Alimentaire</option>
+                                            <option value="medicaments">Médicaments</option>
+                                            <option value="cosmetiques">Cosmétiques</option>
+                                            <option value="autre">Autre</option>
+                                        </select>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Sélectionnez un type de produit</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Type de Cargaison <span class="text-red-500">*</span></label>
+                                        <select class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="type_cargaison" required>
+                                            <option value="">Sélectionnez...</option>
+                                            <option value="maritime">Maritime (Moins cher)</option>
+                                            <option value="aerienne">Aérienne (Plus rapide)</option>
+                                            <option value="routiere">Routière (Régional)</option>
+                                        </select>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Sélectionnez un type de cargaison</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4 col-span-2">
+                                        <label class="font-medium text-gray-700 mb-1">Description du Contenu</label>
+                                        <textarea class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 min-h-[80px]" name="description" placeholder="Décrivez brièvement le contenu du colis..."></textarea>
+                                        <div class="text-xs text-gray-500 mt-1">Description optionnelle pour faciliter l'identification</div>
+                                    </div>
+                                </div>
+
+                                <!-- Calcul du Prix -->
+                                <div class="bg-gradient-to-r from-blue-400 to-blue-700 text-white rounded-xl p-6 mb-6" id="pricingCard" style="display: none;">
+                                    <div class="flex items-center gap-2 text-xl font-semibold mb-4">
+                                        <i class="fas fa-calculator"></i>
+                                        Calcul du Prix
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                            <div class="text-sm opacity-90 mb-1">Poids</div>
+                                            <div class="text-lg font-semibold" id="calcPoids">-</div>
+                                        </div>
+                                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                            <div class="text-sm opacity-90 mb-1">Type</div>
+                                            <div class="text-lg font-semibold" id="calcType">-</div>
+                                        </div>
+                                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                            <div class="text-sm opacity-90 mb-1">Prix au kg</div>
+                                            <div class="text-lg font-semibold" id="calcPrixKg">-</div>
+                                        </div>
+                                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                            <div class="text-sm opacity-90 mb-1">Sous-total</div>
+                                            <div class="text-lg font-semibold" id="calcSousTotal">-</div>
+                                        </div>
+                                        <div class="col-span-1 md:col-span-2 lg:col-span-4 bg-white bg-opacity-30 rounded-lg p-4 text-center mt-4">
+                                            <div class="text-sm opacity-90 mb-1">Total à Payer</div>
+                                            <div class="text-2xl font-bold" id="calcTotal">-</div>
+                                            <div class="text-xs opacity-90 mt-2">
+                                                (Minimum: 10 000 FCFA)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Étape 3: Informations Destinataire -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-100 mb-6" id="step3" style="display: none;">
+                            <div class="px-6 py-6 border-b border-gray-100">
+                                <div class="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                                    <i class="fas fa-user-tag"></i>
+                                    Informations du Destinataire
+                                </div>
+                                <div class="text-sm text-gray-500 mt-2">
+                                    Saisissez les informations de la personne qui recevra le colis
+                                </div>
+                            </div>
+                            <div class="px-6 py-6">
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="destinataire_nom" required>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Ce champ est obligatoire</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="destinataire_prenom" required>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Ce champ est obligatoire</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Téléphone <span class="text-red-500">*</span></label>
+                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="destinataire_telephone" required>
+                                        <div class="text-xs text-gray-500 mt-1">Le destinataire recevra le code de suivi par SMS</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Numéro de téléphone invalide</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4">
+                                        <label class="font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="email" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" name="destinataire_email">
+                                        <div class="text-xs text-gray-500 mt-1">Optionnel - pour les notifications par email</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Adresse email invalide</div>
+                                    </div>
+                                    <div class="flex flex-col mb-4 col-span-2">
+                                        <label class="font-medium text-gray-700 mb-1">Adresse de Livraison <span class="text-red-500">*</span></label>
+                                        <textarea class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 min-h-[100px]" name="destinataire_adresse" required></textarea>
+                                        <div class="text-xs text-gray-500 mt-1">Adresse complète où le destinataire récupérera le colis</div>
+                                        <div class="text-xs text-red-500 mt-1 hidden">Ce champ est obligatoire</div>
+                                    </div>
+                                </div>
+
+                                <!-- Sélection de Cargaison -->
+                                <div class="mt-8">
+                                    <h4 class="mb-4 font-semibold text-gray-700">Cargaisons Disponibles</h4>
+                                    <div class="grid gap-4" id="cargaisonList">
+                                        <!-- Les cargaisons seront chargées dynamiquement -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Étape 4: Confirmation et Reçu -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-100 mb-6" id="step4" style="display: none;">
+                            <div class="px-6 py-6 border-b border-gray-100">
+                                <div class="flex items-center gap-3 text-lg font-semibold text-gray-800">
+                                    <i class="fas fa-check-circle"></i>
+                                    Confirmation et Reçu
+                                </div>
+                                <div class="text-sm text-gray-500 mt-2">
+                                    Vérifiez les informations et générez le reçu pour le client
+                                </div>
+                            </div>
+                            <div class="px-6 py-6">
+                                <div class="flex items-center gap-3 bg-green-100 border border-green-300 text-green-700 rounded-lg p-4 mb-4">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Colis enregistré avec succès!</strong><br>
+                                        Le code de suivi a été généré et sera envoyé au destinataire.
+                                    </div>
+                                </div>
+
+                                <!-- Receipt Preview -->
+                                <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 my-6 bg-white" id="receiptPreview">
+                                    <div class="text-center mb-6 pb-4 border-b-2 border-gray-100">
+                                        <div class="text-2xl text-blue-700 mb-2">
+                                            <i class="fas fa-shipping-fast"></i>
+                                        </div>
+                                        <div class="text-xl font-bold text-gray-800 mb-1">GP_MONDE</div>
+                                        <div class="text-sm text-gray-500">Reçu d'Enregistrement de Colis</div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <div class="flex flex-col gap-3">
+                                            <div class="font-semibold text-blue-700 uppercase text-xs mb-2">Expéditeur</div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Nom:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-exp-nom">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Téléphone:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-exp-tel">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2">
+                                                <span class="text-gray-500 text-xs">Adresse:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-exp-adresse">-</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col gap-3">
+                                            <div class="font-semibold text-blue-700 uppercase text-xs mb-2">Destinataire</div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Nom:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-dest-nom">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Téléphone:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-dest-tel">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2">
+                                                <span class="text-gray-500 text-xs">Adresse:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-dest-adresse">-</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col gap-3">
+                                            <div class="font-semibold text-blue-700 uppercase text-xs mb-2">Détails Colis</div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Nombre:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-nombre">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Poids:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-poids">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2">
+                                                <span class="text-gray-500 text-xs">Type:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-type">-</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col gap-3">
+                                            <div class="font-semibold text-blue-700 uppercase text-xs mb-2">Cargaison</div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Numéro:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-cargaison">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2 border-b border-gray-100">
+                                                <span class="text-gray-500 text-xs">Type:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-cargaison-type">-</span>
+                                            </div>
+                                            <div class="flex justify-between py-2">
+                                                <span class="text-gray-500 text-xs">Trajet:</span>
+                                                <span class="font-medium text-gray-800" id="receipt-trajet">-</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-span-1 md:col-span-2 bg-gray-50 rounded-lg p-4 text-center mt-4">
+                                            <div class="mb-2 text-sm">Total Payé</div>
+                                            <div class="text-xl font-bold text-blue-700" id="receipt-total">-</div>
+                                        </div>
+
+                                        <div class="col-span-1 md:col-span-2 text-center mt-4 p-4 bg-gradient-to-r from-blue-400 to-blue-700 text-white rounded-lg">
+                                            <div class="text-xs opacity-90 mb-2">Code de Suivi</div>
+                                            <div class="text-lg font-bold tracking-widest font-mono" id="receipt-tracking">CG-2024-001234</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="flex justify-between items-center px-6 py-6 bg-gray-50 border-t border-gray-100 rounded-b-xl">
+                            <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-gray-50 text-gray-800 border-2 border-gray-200 hover:bg-white hover:border-blue-700" id="prevBtn" onclick="previousStep()">
+                                <i class="fas fa-arrow-left"></i>
+                                Précédent
+                            </button>
+                            <div class="flex gap-2">
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-transparent text-blue-700 border-2 border-blue-700 hover:bg-blue-700 hover:text-white" onclick="resetForm()">
+                                    <i class="fas fa-times"></i>
+                                    Annuler
+                                </button>
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-blue-700 text-white hover:bg-blue-800" id="nextBtn" onclick="nextStep()">
+                                    Suivant
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-green-500 text-white hover:bg-green-600" id="printBtn" onclick="printReceipt()" style="display: none;">
+                                    <i class="fas fa-print"></i>
+                                    Imprimer Reçu
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let formData = {};
+        let pricingRules = {
+            maritime: 500,  // FCFA per kg
+            aerienne: 1200, // FCFA per kg
+            routiere: 800   // FCFA per kg
+        };
+        let selectedCargaison = null;
+
+        // Navigation entre les étapes
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < 4) {
+                    if (currentStep === 2) {
+                        loadAvailableCargaisons();
+                    }
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    currentStep++;
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+                    updateStepIndicators();
+                } else {
+                    // Soumettre le formulaire
+                    submitForm();
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep--;
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+                updateStepIndicators();
+            }
+        }
+
+        function updateStepIndicators() {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                const indicator = step.querySelector('.step-indicator');
+                const label = step.querySelector('.step-label');
+                if (index < currentStep - 1) {
+                    indicator.classList.remove('bg-gray-200', 'text-gray-400');
+                    indicator.classList.add('bg-success-color', 'text-white');
+                    label.classList.remove('text-gray-400');
+                    label.classList.add('text-blue-700');
+                } else if (index === currentStep - 1) {
+                    indicator.classList.remove('bg-gray-200', 'text-gray-400');
+                    indicator.classList.add('bg-blue-700', 'text-white');
+                    label.classList.remove('text-gray-400');
+                    label.classList.add('text-blue-700');
+                } else {
+                    indicator.classList.remove('bg-success-color', 'text-white');
+                    indicator.classList.add('bg-gray-200', 'text-gray-400');
+                    label.classList.add('text-gray-400');
+                }
+            });
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+            const inputs = document.querySelectorAll(`#step${step} [required]`);
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('border-red-500');
+                    const error = input.nextElementSibling;
+                    if (error && error.classList.contains('form-error')) {
+                        error.style.display = 'block';
+                    }
+                } else {
+                    input.classList.remove('border-red-500');
+                    const error = input.nextElementSibling;
+                    if (error && error.classList.contains('form-error')) {
+                        error.style.display = 'none';
+                    }
+                }
+            });
+            return isValid;
+        }
+
+        function loadAvailableCargaisons() {
+            const typeCargaison = document.querySelector('select[name="type_cargaison"]').value;
+            const cargaisonList = document.getElementById('cargaisonList');
+            cargaisonList.innerHTML = '';
+
+            if (typeCargaison) {
+                // Simuler un chargement dynamique
+                setTimeout(() => {
+                    const cargaisons = [
+                        { id: 1, type: 'Maritime', details: 'Bateau - 5 jours', prix: 30000 },
+                        { id: 2, type: 'Aérienne', details: 'Avion - 1 jour', prix: 100000 },
+                        { id: 3, type: 'Routière', details: 'Camion - 3 jours', prix: 15000 },
+                    ];
+
+                    cargaisons.forEach(cargaison => {
+                        const div = document.createElement('div');
+                        div.className = 'cargaison-item border-2 border-gray-200 rounded-lg p-4 cursor-pointer transition-all';
+                        div.innerHTML = `
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="text-lg font-semibold text-gray-800">${cargaison.type}</div>
+                                <div class="text-sm text-gray-500">${cargaison.details}</div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="text-xl font-bold text-blue-700">${cargaison.prix} FCFA</div>
+                                <button class="btn-select-cargaison bg-blue-700 text-white rounded-lg px-4 py-2 text-sm font-semibold" data-id="${cargaison.id}" data-prix="${cargaison.prix}">
+                                    Sélectionner
+                                </button>
+                            </div>
+                        `;
+                        cargaisonList.appendChild(div);
+                    });
+                }, 500);
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-select-cargaison')) {
+                const id = e.target.getAttribute('data-id');
+                const prix = e.target.getAttribute('data-prix');
+
+                document.querySelectorAll('.cargaison-item').forEach(item => {
+                    item.classList.remove('bg-blue-50', 'border-blue-700');
+                });
+
+                const selectedItem = e.target.closest('.cargaison-item');
+                selectedItem.classList.add('bg-blue-50', 'border-blue-700');
+                selectedCargaison = { id, prix };
+
+                // Mettre à jour le prix dans la section de calcul
+                document.getElementById('calcType').innerText = selectedCargaison.id === '1' ? 'Maritime' : selectedCargaison.id === '2' ? 'Aérienne' : 'Routière';
+                document.getElementById('calcPrixKg').innerText = `${pricingRules[selectedCargaison.id === '1' ? 'maritime' : selectedCargaison.id === '2' ? 'aerienne' : 'routiere']} FCFA`;
+                document.getElementById('calcSousTotal').innerText = `${(parseFloat(document.querySelector('input[name="poids"]').value) * (selectedCargaison.id === '1' ? pricingRules.maritime : selectedCargaison.id === '2' ? pricingRules.aerienne : pricingRules.routiere)).toFixed(0)} FCFA`;
+                document.getElementById('calcTotal').innerText = `${Math.max(10000, parseFloat(document.getElementById('calcSousTotal').innerText))} FCFA`;
+            }
+        });
+
+        function submitForm() {
+            // Rassembler les données du formulaire
+            const formData = new FormData(document.getElementById('colisForm'));
+            formData.append('cargaison_id', selectedCargaison.id);
+            formData.append('cargaison_prix', selectedCargaison.prix);
+
+            // Envoyer les données au serveur (simulation)
+            setTimeout(() => {
+                // Afficher le reçu
+                document.getElementById('step4').style.display = 'block';
+                document.getElementById('step3').style.display = 'none';
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('step1').style.display = 'none';
+                updateStepIndicators();
+
+                // Remplir les informations du reçu
+                document.getElementById('receipt-exp-nom').innerText = document.querySelector('input[name="expediteur_nom"]').value;
+                document.getElementById('receipt-exp-tel').innerText = document.querySelector('input[name="expediteur_telephone"]').value;
+                document.getElementById('receipt-exp-adresse').innerText = document.querySelector('textarea[name="expediteur_adresse"]').value;
+
+                document.getElementById('receipt-dest-nom').innerText = document.querySelector('input[name="destinataire_nom"]').value;
+                document.getElementById('receipt-dest-tel').innerText = document.querySelector('input[name="destinataire_telephone"]').value;
+                document.getElementById('receipt-dest-adresse').innerText = document.querySelector('textarea[name="destinataire_adresse"]').value;
+
+                document.getElementById('receipt-nombre').innerText = document.querySelector('input[name="nombre_colis"]').value;
+                document.getElementById('receipt-poids').innerText = document.querySelector('input[name="poids"]').value + ' kg';
+                document.getElementById('receipt-type').innerText = document.querySelector('select[name="type_produit"] option:checked').text;
+
+                document.getElementById('receipt-cargaison').innerText = selectedCargaison.id;
+                document.getElementById('receipt-cargaison-type').innerText = selectedCargaison.id === '1' ? 'Maritime' : selectedCargaison.id === '2' ? 'Aérienne' : 'Routière';
+                document.getElementById('receipt-trajet').innerText = selectedCargaison.id === '1' ? 'Bateau - 5 jours' : selectedCargaison.id === '2' ? 'Avion - 1 jour' : 'Camion - 3 jours';
+
+                document.getElementById('receipt-total').innerText = `${Math.max(10000, parseFloat(document.getElementById('calcSousTotal').innerText))} FCFA`;
+                document.getElementById('receipt-tracking').innerText = 'CG-2024-001234'; // Exemple de code de suivi
+            }, 500);
+        }
+
+        function printReceipt() {
+            const receiptContent = document.getElementById('receiptPreview').innerHTML;
+            const win = window.open('', '', 'width=900,height=700');
+            win.document.write(`
+                <html>
+                    <head>
+                        <title>Reçu GP_MONDE</title>
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                        <style>
+                            body {
+                                font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+                                background-color: #f8fafc;
+                                color: #1e293b;
+                                line-height: 1.6;
+                            }
+                            .container {
+                                max-width: 800px;
+                                margin: 0 auto;
+                                padding: 20px;
+                                background-color: #fff;
+                                border-radius: 8px;
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            }
+                            h1 {
+                                font-size: 28px;
+                                font-weight: 600;
+                                margin-bottom: 20px;
+                                color: #1e40af;
+                            }
+                            h2 {
+                                font-size: 22px;
+                                font-weight: 500;
+                                margin-bottom: 18px;
+                                color: #1e3a8a;
+                            }
+                            h3 {
+                                font-size: 18px;
+                                font-weight: 500;
+                                margin-bottom: 16px;
+                                color: #1e3a8a;
+                            }
+                            p {
+                                font-size: 16px;
+                                margin-bottom: 12px;
+                            }
+                            .text-blue-700 {
+                                color: #1e40af;
+                            }
+                            .font-semibold {
+                                font-weight: 600;
+                            }
+                            .uppercase {
+                                text-transform: uppercase;
+                            }
+                            .border {
+                                border-width: 1px;
+                                border-style: solid;
+                                border-color: #e5e7eb;
+                            }
+                            .rounded-lg {
+                                border-radius: 0.5rem;
+                            }
+                            .p-4 {
+                                padding: 1rem;
+                            }
+                            .mb-4 {
+                                margin-bottom: 1rem;
+                            }
+                            .grid {
+                                display: grid;
+                                gap: 1rem;
+                            }
+                            .grid-cols-2 {
+                                grid-template-columns: repeat(2, 1fr);
+                            }
+                            .gap-4 {
+                                gap: 1.5rem;
+                            }
+                            @media print {
+                                body {
+                                    -webkit-print-color-adjust: exact;
+                                    color: #000;
+                                    background: #fff;
+                                }
+                                .container {
+                                    border: none;
+                                    border-radius: 0;
+                                    box-shadow: none;
+                                    padding: 0;
+                                }
+                                h1, h2, h3, p {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                .no-print {
+                                    display: none;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="text-center mb-6">
+                                <div class="text-3xl text-blue-700">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <h1 class="text-2xl font-bold text-gray-800">Reçu d'Enregistrement de Colis</h1>
+                            </div>
+                            <div class="mb-4">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2">Expéditeur</h2>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Nom:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-exp-nom-print">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Téléphone:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-exp-tel-print">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2">Destinataire</h2>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Nom:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-dest-nom-print">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Téléphone:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-dest-tel-print">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2">Détails du Colis</h2>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Nombre:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-nombre-print">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Poids:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-poids-print">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2">Cargaison</h2>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Numéro:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-cargaison-print">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-500 text-sm">Type:</p>
+                                        <p class="font-medium text-gray-800" id="receipt-cargaison-type-print">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2">Total Payé</h2>
+                                <p class="text-2xl font-bold text-blue-700" id="receipt-total-print">-</p>
+                            </div>
+                            <div class="text-center mt-4">
+                                <div class="text-xs opacity-90 mb-2">Code de Suivi</div>
+                                <div class="text-lg font-bold tracking-widest font-mono" id="receipt-tracking-print">CG-2024-001234</div>
+                            </div>
+                        </div>
+                    </body>
+                </html>
+            `);
+            win.document.close();
+            win.focus();
+            win.print();
+            win.close();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Remplir les données du reçu pour impression
+            document.getElementById('receipt-exp-nom-print').innerText = document.getElementById('receipt-exp-nom').innerText;
+            document.getElementById('receipt-exp-tel-print').innerText = document.getElementById('receipt-exp-tel').innerText;
+            document.getElementById('receipt-dest-nom-print').innerText = document.getElementById('receipt-dest-nom').innerText;
+            document.getElementById('receipt-dest-tel-print').innerText = document.getElementById('receipt-dest-tel').innerText;
+            document.getElementById('receipt-nombre-print').innerText = document.getElementById('receipt-nombre').innerText;
+            document.getElementById('receipt-poids-print').innerText = document.getElementById('receipt-poids').innerText;
+            document.getElementById('receipt-cargaison-print').innerText = document.getElementById('receipt-cargaison').innerText;
+            document.getElementById('receipt-cargaison-type-print').innerText = document.getElementById('receipt-cargaison-type').innerText;
+            document.getElementById('receipt-total-print').innerText = document.getElementById('receipt-total').innerText;
+            document.getElementById('receipt-tracking-print').innerText = document.getElementById('receipt-tracking').innerText;
+        });
+    </script>
+</body>
+</html>
+
+ /*     let currentStep = 1;
+        let formData = {};
+        let pricingRules = {
+            maritime: 500,   // FCFA per kg
+            aerienne: 1200,  // FCFA per kg
+            routiere: 800    // FCFA per kg
+        };
+        let colisData = [];
+        let trackingCode = '';
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            generateColisInputs();
+            updateButtonsVisibility();
+            
+            // Animation d'entrée pour le formulaire
+            setTimeout(() => {
+                document.getElementById('step1').classList.add('fade-in');
+            }, 100);
+        });
+
+        // Mise à jour de l'heure
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR');
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Notifications
+        function showNotification(message, type = 'success') {
+            const notificationArea = document.getElementById('notification-area');
+            const notification = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 
+                           type === 'error' ? 'bg-red-100 border-red-400 text-red-700' :
+                           'bg-blue-100 border-blue-400 text-blue-700';
+            
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'error' ? 'fa-exclamation-triangle' : 
+                        'fa-info-circle';
+            
+            notification.className = `${bgColor} border rounded-lg p-4 mb-4 flex items-center gap-3 fade-in`;
+            notification.innerHTML = `
+                <i class="fas ${icon} text-lg"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()" class="ml-auto">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            notificationArea.appendChild(notification);
+            
+            // Auto-remove après 5 secondes
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Génération dynamique des inputs selon le nombre de colis
+        function generateColisInputs() {
+            const nombreColis = parseInt(document.querySelector('input[name="nombre_colis"]').value) || 1;
+            const container = document.getElementById('colis-details-container');
+            
+            container.innerHTML = '';
+            colisData = [];
+
+            for (let i = 1; i <= nombreColis; i++) {
+                const colisDiv = document.createElement('div');
+                colisDiv.className = 'bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-xl p-6 mb-6 fade-in hover:shadow-lg transition-all';
+                colisDiv.innerHTML = `
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                            ${i}
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-800">Colis ${i}</h4>
+                        <div class="ml-auto text-sm text-gray-500">
+                            <i class="fas fa-box"></i>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex flex-col">
+                            <label class="font-medium text-gray-700 mb-2">Type de Produit <span class="text-red-500">*</span></label>
+                            <select class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
+                                    name="colis_${i}_type" required onchange="calculateTotals()">
+                                <option value="">Sélectionnez...</option>
+                                <option value="documents">📄 Documents</option>
+                                <option value="vetements">👔 Vêtements</option>
+                                <option value="electronique">📱 Électronique</option>
+                                <option value="alimentaire">🥘 Alimentaire</option>
+                                <option value="medicaments">💊 Médicaments</option>
+                                <option value="cosmetiques">💄 Cosmétiques</option>
+                                <option value="bijoux">💍 Bijoux</option>
+                                <option value="autre">📦 Autre</option>
+                            </select>
+                            <div class="text-xs text-red-500 mt-1 hidden form-error">Sélectionnez un type</div>
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="font-medium text-gray-700 mb-2">Poids (kg) <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="number" class="border-2 border-gray-200 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
+                                       name="colis_${i}_poids" min="0.1" step="0.1" required onchange="calculateTotals()" 
+                                       placeholder="0.0">
+                                <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">kg</span>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">Poids en kilogrammes</div>
+                            <div class="text-xs text-red-500 mt-1 hidden form-error">Poids requis (min: 0.1kg)</div>
+                        </div>
+                        <div class="flex flex-col md:col-span-2">
+                            <label class="font-medium text-gray-700 mb-2">Description (optionnel)</label>
+                            <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
+                                   name="colis_${i}_description" placeholder="Brève description du contenu...">
+                            <div class="text-xs text-gray-500 mt-1">Description pour faciliter l'identification</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(colisDiv);
+            }
+
+            calculateTotals();
+        }
+
+        // Calcul des totaux (poids et prix)
+        function calculateTotals() {
+            const nombreColis = parseInt(document.querySelector('input[name="nombre_colis"]').value) || 1;
+            const typeCargaison = document.querySelector('select[name="type_cargaison"]').value;
+            
+            let totalWeight = 0;
+            let isComplete = true;
+
+            // Calculer le poids total
+            for (let i = 1; i <= nombreColis; i++) {
+                const poidsInput = document.querySelector(`input[name="colis_${i}_poids"]`);
+                const typeInput = document.querySelector(`select[name="colis_${i}_type"]`);
+                
+                if (poidsInput && poidsInput.value) {
+                    totalWeight += parseFloat(poidsInput.value);
+                } else {
+                    isComplete = false;
+                }
+                
+                if (typeInput && !typeInput.value) {
+                    isComplete = false;
+                }
+            }
+
+            // Mettre à jour l'affichage
+            document.getElementById('total-weight').textContent = totalWeight.toFixed(1) + ' kg';
+
+            if (typeCargaison && totalWeight > 0) {
+                const pricePerKg = pricingRules[typeCargaison];
+                const subtotal = totalWeight * pricePerKg;
+                const total = Math.max(10000, subtotal); // Minimum 10,000 FCFA
+
+                document.getElementById('price-per-kg').textContent = pricePerKg.toLocaleString() + ' FCFA';
+                document.getElementById('subtotal').textContent = subtotal.toLocaleString() + ' FCFA';
+                document.getElementById('total-price').textContent = total.toLocaleString() + ' FCFA';
+
+                document.getElementById('pricing-summary').style.display = 'block';
+                document.getElementById('pricing-summary').classList.add('fade-in');
+            } else {
+                document.getElementById('pricing-summary').style.display = 'none';
+            }
+        }
+
+        // Mise à jour du pricing quand le type de cargaison change
+        function updatePricing() {
+            calculateTotals();
+            const typeCargaison = document.querySelector('select[name="type_cargaison"]').value;
+            if (typeCargaison) {
+                showNotification(`Type de cargaison sélectionné: ${typeCargaison.charAt(0).toUpperCase() + typeCargaison.slice(1)}`, 'info');
+            }
+        }
+
+        // Navigation entre les étapes
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < 4) {
+                    // Animation de sortie
+                    document.getElementById(`step${currentStep}`).style.opacity = '0';
+                    document.getElementById(`step${currentStep}`).style.transform = 'translateX(-20px)';
+                    
+                    setTimeout(() => {
+                        document.getElementById(`step${currentStep}`).style.display = 'none';
+                        currentStep++;
+                        
+                        // Animation d'entrée
+                        document.getElementById(`step${currentStep}`).style.display = 'block';
+                        document.getElementById(`step${currentStep}`).style.opacity = '0';
+                        document.getElementById(`step${currentStep}`).style.transform = 'translateX(20px)';
+                        
+                        setTimeout(() => {
+                            document.getElementById(`step${currentStep}`).style.opacity = '1';
+                            document.getElementById(`step${currentStep}`).style.transform = 'translateX(0)';
+                        }, 50);
+                        
+                        updateStepIndicators();
+                        updateButtonsVisibility();
+                        
+                        if (currentStep === 4) {
+                            generateReceipt();
+                            submitForm();
+                        }
+                    }, 200);
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                // Animation de sortie
+                document.getElementById(`step${currentStep}`).style.opacity = '0';
+                document.getElementById(`step${currentStep}`).style.transform = 'translateX(20px)';
+                
+                setTimeout(() => {
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    currentStep--;
+                    
+                    // Animation d'entrée
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+                    document.getElementById(`step${currentStep}`).style.opacity = '0';
+                    document.getElementById(`step${currentStep}`).style.transform = 'translateX(-20px)';
+                    
+                    setTimeout(() => {
+                        document.getElementById(`step${currentStep}`).style.opacity = '1';
+                        document.getElementById(`step${currentStep}`).style.transform = 'translateX(0)';
+                    }, 50);
+                    
+                    updateStepIndicators();
+                    updateButtonsVisibility();
+                }, 200);
+            }
+        }
+
+        function updateStepIndicators() {
+            for (let i = 1; i <= 4; i++) {
+                const indicator = document.querySelector(`#step-indicator-${i} .w-10`);
+                const label = document.querySelector(`#step-indicator-${i} .font-medium`);
+                const progress = document.getElementById(`progress-${i}-${i+1}`);
+                
+                if (i < currentStep) {
+                    // Étape complétée
+                    indicator.className = 'w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-green-500 text-white shadow-lg';
+                    indicator.innerHTML = '<i class="fas fa-check"></i>';
+                    label.className = 'font-medium text-sm text-green-600';
+                    if (progress) progress.className = 'w-16 h-0.5 bg-green-400 mx-4';
+                } else if (i === currentStep) {
+                    // Étape actuelle
+                    indicator.className = 'w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-blue-700 text-white shadow-lg pulse';
+                    indicator.innerHTML = i;
+                    label.className = 'font-medium text-sm text-blue-700';
+                    if (progress) progress.className = 'w-16 h-0.5 bg-gray-200 mx-4';
+                } else {
+                    // Étape à venir
+                    indicator.className = 'w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm bg-gray-200 text-gray-400';
+                    indicator.innerHTML = i;
+                    label.className = 'font-medium text-sm text-gray-400';
+                    if (progress) progress.className = 'w-16 h-0.5 bg-gray-200 mx-4';
+                }
+            }
+        }
+
+        function updateButtonsVisibility() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const printBtn = document.getElementById('printBtn');
+            const newColisBtn = document.getElementById('newColisBtn');
+
+            prevBtn.style.display = currentStep > 1 ? 'flex' : 'none';
+            
+            if (currentStep === 4) {
+                nextBtn.style.display = 'none';
+                printBtn.style.display = 'flex';
+                newColisBtn.style.display = 'flex';
+            } else {
+                nextBtn.style.display = 'flex';
+                printBtn.style.display = 'none';
+                newColisBtn.style.display = 'none';
+                nextBtn.innerHTML = currentStep === 3 ? '<i class="fas fa-check mr-2"></i>Finaliser' : 'Suivant <i class="fas fa-arrow-right ml-2"></i>';
+            }
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+            const stepElement = document.getElementById(`step${step}`);
+            
+            // Réinitialiser les erreurs
+            stepElement.querySelectorAll('.form-error').forEach(error => {
+                error.classList.add('hidden');
+            });
+            stepElement.querySelectorAll('input, select, textarea').forEach(input => {
+                input.classList.remove('border-red-500', 'ring-red-200');
+            });
+
+            // Valider les champs requis
+            const requiredInputs = stepElement.querySelectorAll('[required]');
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('border-red-500', 'ring-red-200', 'ring-2');
+                    const error = input.parentNode.querySelector('.form-error');
+                    if (error) {
+                        error.classList.remove('hidden');
+                    }
+                }
+            });
+
+            // Validation spécifique pour l'étape 2
+            if (step === 2) {
+                const nombreColis = parseInt(document.querySelector('input[name="nombre_colis"]').value) || 1;
+                
+                for (let i = 1; i <= nombreColis; i++) {
+                    const poidsInput = document.querySelector(`input[name="colis_${i}_poids"]`);
+                    const typeInput = document.querySelector(`select[name="colis_${i}_type"]`);
+                    
+                    if (!poidsInput.value || parseFloat(poidsInput.value) < 0.1) {
+                        isValid = false;
+                        poidsInput.classList.add('border-red-500', 'ring-red-200', 'ring-2');
+                        const error = poidsInput.parentNode.parentNode.querySelector('.form-error');
+                        if (error) error.classList.remove('hidden');
+                    }
+                    
+                    if (!typeInput.value) {
+                        isValid = false;
+                        typeInput.classList.add('border-red-500', 'ring-red-200', 'ring-2');
+                        const error = typeInput.parentNode.querySelector('.form-error');
+                        if (error) error.classList.remove('hidden');
+                    }
+                }
+            }
+
+            // Validation des téléphones
+            const phoneInputs = stepElement.querySelectorAll('input[type="tel"]');
+            phoneInputs.forEach(input => {
+                if (input.value && !validatePhone(input.value)) {
+                    isValid = false;
+                    input.classList.add('border-red-500', 'ring-red-200', 'ring-2');
+                    const error = input.parentNode.querySelector('.form-error');
+                    if (error) error.classList.remove('hidden');
+                }
+            });
+
+            if (!isValid) {
+                showNotification('Veuillez corriger les erreurs avant de continuer.', 'error');
+            }
+
+            return isValid;
+        }
+
+        function validatePhone(phone) {
+            // Simple validation pour les numéros sénégalais
+            const phoneRegex = /^\+?221\s?[0-9\s-]{8,}$/;
+            return phoneRegex.test(phone);
+        }
+
+        function generateReceipt() {
+            trackingCode = generateTrackingCode();
+            
+            // Données expéditeur
+            const expNom = document.querySelector('input[name="expediteur_nom"]').value;
+            const expPrenom = document.querySelector('input[name="expediteur_prenom"]').value;
+            const expTel = document.querySelector('input[name="expediteur_telephone"]').value;
+            const expEmail = document.querySelector('input[name="expediteur_email"]').value || 'Non fourni';
+            
+            document.getElementById('receipt-exp-nom').textContent = `${expNom} ${expPrenom}`;
+            document.getElementById('receipt-exp-tel').textContent = expTel;
+            document.getElementById('receipt-exp-email').textContent = expEmail;
+
+            // Données destinataire
+            const destNom = document.querySelector('input[name="destinataire_nom"]').value;
+            const destPrenom = document.querySelector('input[name="destinataire_prenom"]').value;
+            const destTel = document.querySelector('input[name="destinataire_telephone"]').value;
+            const destEmail = document.querySelector('input[name="destinataire_email"]').value || 'Non fourni';
+            
+            document.getElementById('receipt-dest-nom').textContent = `${destNom} ${destPrenom}`;
+            document.getElementById('receipt-dest-tel').textContent = destTel;
+            document.getElementById('receipt-dest-email').textContent = destEmail;
+
+            // Détails des colis
+            const nombreColis = parseInt(document.querySelector('input[name="nombre_colis"]').value);
+            const colisDetailsContainer = document.getElementById('receipt-colis-details');
+            colisDetailsContainer.innerHTML = '';
+
+            let totalWeight = 0;
+            for (let i = 1; i <= nombreColis; i++) {
+                const typeSelect = document.querySelector(`select[name="colis_${i}_type"]`);
+                const type = typeSelect.options[typeSelect.selectedIndex].text;
+                const poids = parseFloat(document.querySelector(`input[name="colis_${i}_poids"]`).value);
+                const description = document.querySelector(`input[name="colis_${i}_description"]`).value || 'Non spécifiée';
+                
+                totalWeight += poids;
+
+                const colisDiv = document.createElement('div');
+                colisDiv.className = 'bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200';
+                colisDiv.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">Colis ${i}</span>
+                                <span class="text-gray-700 font-medium">${type}</span>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <span class="font-medium">${poids}kg</span>
+                                ${description !== 'Non spécifiée' ? ` • ${description}` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                colisDetailsContainer.appendChild(colisDiv);
+            }
+
+            // Résumé
+            document.getElementById('receipt-nombre').textContent = nombreColis;
+            document.getElementById('receipt-poids-total').textContent = totalWeight.toFixed(1) + ' kg';
+            
+            const typeCargaisonSelect = document.querySelector('select[name="type_cargaison"]');
+            const typeCargaison = typeCargaisonSelect.options[typeCargaisonSelect.selectedIndex].text;
+            document.getElementById('receipt-type-cargaison').textContent = typeCargaison;
+
+            // Prix total
+            const totalPrice = document.getElementById('total-price').textContent;
+            document.getElementById('receipt-total').textContent = totalPrice;
+
+            // Date et code de suivi
+            const now = new Date();
+            const dateOptions = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            document.getElementById('receipt-date').textContent = now.toLocaleDateString('fr-FR', dateOptions);
+            document.getElementById('receipt-tracking').textContent = trackingCode;
+        }
+
+        function generateTrackingCode() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hour = String(now.getHours()).padStart(2, '0');
+            const minute = String(now.getMinutes()).padStart(2, '0');
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            return `CG${year}${month}${day}${hour}${minute}${random}`;
+        }
+
+        function submitForm() {
+            const submitData = {
+                expediteur: {
+                    nom: document.querySelector('input[name="expediteur_nom"]').value,
+                    prenom: document.querySelector('input[name="expediteur_prenom"]').value,
+                    telephone: document.querySelector('input[name="expediteur_telephone"]').value,
+                    email: document.querySelector('input[name="expediteur_email"]').value,
+                    adresse: document.querySelector('textarea[name="expediteur_adresse"]').value
+                },
+                destinataire: {
+                    nom: document.querySelector('input[name="destinataire_nom"]').value,
+                    prenom: document.querySelector('input[name="destinataire_prenom"]').value,
+                    telephone: document.querySelector('input[name="destinataire_telephone"]').value,
+                    email: document.querySelector('input[name="destinataire_email"]').value,
+                    adresse: document.querySelector('textarea[name="destinataire_adresse"]').value
+                },
+                colis: [],
+                type_cargaison: document.querySelector('select[name="type_cargaison"]').value,
+                nombre_colis: parseInt(document.querySelector('input[name="nombre_colis"]').value),
+                tracking_code: trackingCode,
+                date_creation: new Date().toISOString(),
+                prix_total: document.getElementById('total-price').textContent
+            };
+
+            // Ajouter les détails des colis
+          /*   const nombreColis = parseInt(document.querySelector('input[name="nombre_colis"]').value);
+            for (let i = 1; i <= nombreC">Nombre de Colis</div>
+                                            <div class="text-lg font-bold text-blue-700" id="receipt-nombre">-</div>
+                                        </div>
+                                        <div class="bg-gray-50 rounded-lg p-4 text-center border border-gray-200">
+                                            <div class="text-sm text-gray-600 mb-1">Type de Cargaison</div>
+                                            <div class="text-lg font-bold text-blue-700" id="receipt-type-cargaison">-</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg p-6 text-center mb-6 shadow-lg">
+                                        <div class="text-sm opacity-90 mb-1">Total Payé</div>
+                                        <div class="text-3xl font-bold" id="receipt-total">-</div>
+                                        <div class="text-xs opacity-90 mt-2">Montant encaissé</div>
+                                    </div>
+
+                                    <div class="text-center p-6 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow-xl">
+                                        <div class="text-sm opacity-90 mb-3">🔍 Code de Suivi</div>
+                                        <div class="text-2xl font-bold tracking-widest font-mono bg-white bg-opacity-20 rounded-lg py-3 px-4" id="receipt-tracking">CG-2024-001234</div>
+                                        <div class="text-xs opacity-90 mt-3">Gardez ce code pour suivre votre colis</div>
+                                    </div>
+
+                                    <div class="mt-6 pt-4 border-t-2 border-dashed border-gray-300 text-center text-xs text-gray-500">
+                                        <p>📞 Service Client: +221 33 XXX XX XX | 📧 contact@GP_MONDE.sn</p>
+                                        <p class="mt-1">Merci de votre confiance - GP_MONDE, votre partenaire logistique</p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions après confirmation -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">
+                                            <i class="fas fa-sms mr-2"></i>Notification SMS
+                                        </h4>
+                                        <p class="text-sm text-blue-700">Le code de suivi sera automatiquement envoyé au destinataire par SMS.</p>
+                                    </div>
+                                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                        <h4 class="font-semibold text-green-800 mb-2">
+                                            <i class="fas fa-envelope mr-2"></i>Notification Email
+                                        </h4>
+                                        <p class="text-sm text-green-700">Un email de confirmation sera envoyé si une adresse email est fournie.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="flex justify-between items-center px-6 py-6 bg-white border border-gray-100 rounded-xl shadow-sm">
+                            <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 border-2 border-gray-200 hover:bg-gray-200 transition-colors" id="prevBtn" onclick="previousStep()" style="display: none;">
+                                <i class="fas fa-arrow-left"></i>
+                                Précédent
+                            </button>
+                            <div class="flex gap-3">
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 border-2 border-gray-200 hover:bg-gray-200 transition-colors" onclick="resetForm()">
+                                    <i class="fas fa-times"></i>
+                                    Annuler
+                                </button>
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-blue-700 text-white hover:bg-blue-800 transition-colors shadow-lg" id="nextBtn" onclick="nextStep()">
+                                    Suivant
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors shadow-lg" id="printBtn" onclick="printReceipt()" style="display: none;">
+                                    <i class="fas fa-print"></i>
+                                    Imprimer Reçu
+                                </button>
+                                <button type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-purple-600 text-white hover:bg-purple-700 transition-colors shadow-lg" id="newColisBtn" onclick="newColis()" style="display: none;">
+                                    <i class="fas fa-plus"></i>
+                                    Nouveau Colis
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+ */
