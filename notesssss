@@ -1,0 +1,1 @@
+npm install --save-dev @types/node       poutr utiliser les modules fs path dirname qui sont natifs node.js   

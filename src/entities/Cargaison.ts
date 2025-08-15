@@ -1,16 +1,23 @@
+import { Colis } from "./Colis";
+import { EtatGlobal } from "../enums/EtatGlobal";
+import { EtatAvancement } from "../enums/EtatAvancement";
+import { TypeCargaison } from "../enums/TypeCargaison";
 
 export class Cargaison {
-
-  protected id: number ;
-  protected numero: number ;
-  protected poids_max: number ;
-  protected colis: string;
-  protected montant_total: number ; 
-  protected lieu_depart: string ;
-  protected date_depart: Date ;
-  protected lieu_arrive: string ;
-  protected date_arrive: Date ;
-  protected etat_avancement: Enumerator  ;
-  protected etat_global: 
-
+    constructor(
+        public id: number,
+        public numero: number,
+        public poidsMax: number,
+        public colis: Colis[],
+        public montantTotal: number,
+        public lieuDepart: string,
+        public dateDepart: Date,
+        public lieuArrive: string,
+        public dateArrive: Date,
+        public etatAvancement: EtatAvancement,
+        public etatGlobal: EtatGlobal,
+        public typeCargaison: TypeCargaison,
+        public codeCargaison: string,
+        public distance: number
+    ) {}
 }

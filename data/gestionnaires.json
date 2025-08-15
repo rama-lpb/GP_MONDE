@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "nom": "Gueye",
+    "prenom": "Rama",
+    "tel": "+221771279062",
+    "adresse": "Dakar",
+    "email": "rama@odc.sn",
+    "login": "rama",
+    "motDePasse": "passer"
+  },
+  {
+    "id": 2,
+    "nom": "Odc",
+    "prenom": "Admin",
+    "tel": "+221771234567",
+    "adresse": "Dakar",
+    "email": "admin@odc.sn",
+    "login": "admin",
+    "motDePasse": "passer"
+  }
+]

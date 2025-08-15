@@ -33,16 +33,16 @@
                 <h2 class="text-2xl font-bold text-blue-900 mb-2">Connexion Vous</h2>
                 <p class="text-gray-500 text-center">Accédez à votre espace de gestion</p>
             </div>
-            <form method="post" action="/login" class="space-y-6">
+            <form id="loginForm" method="post" action="/login" class="space-y-6">
                 <div>
                     <label for="login" class="block text-sm font-medium text-gray-700 mb-2">Nom d'utilisateur</label>
                     <input type="text" id="login" name="login"  autocomplete="username"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre identifiant">
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre identifiant" required>
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                     <input type="password" id="password" name="password"  autocomplete="current-password"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre mot de passe">
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre mot de passe" required>
                 </div>
                 <div class="flex items-center justify-between ">
                     <label class="flex items-center text-sm text-gray-600">
