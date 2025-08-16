@@ -9,7 +9,7 @@ export class Gestionnaire extends Personne {
         adresse: string,
         email: string,
         public login: string,
-        public motDePasse: string
+        public password: string
     ) {
         super(id, nom, prenom, tel, adresse, email);
     }

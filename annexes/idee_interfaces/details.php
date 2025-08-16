@@ -121,20 +121,20 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Nombre de Colis <span class="text-red-500">*</span></label>
-                                        <input type="number" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="nombre_colis" min="1" value="1" required>
+                                        <input type="number" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="nombre_colis" min="1" value="1" >
                                         <div class="text-xs text-red-500 mt-1 hidden" id="nombre-error">Minimum 1 colis</div>
                                     </div>
                                     
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Poids Total (kg) <span class="text-red-500">*</span></label>
-                                        <input type="number" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="poids" min="0.1" step="0.1" required>
+                                        <input type="number" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="poids" min="0.1" step="0.1" >
                                         <div class="text-xs text-gray-500 mt-1">Poids en kilogrammes</div>
                                         <div class="text-xs text-red-500 mt-1 hidden" id="poids-error">Le poids doit être supérieur à 0</div>
                                     </div>
                                     
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Type de Produit <span class="text-red-500">*</span></label>
-                                        <select class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="type_produit" required>
+                                        <select class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="type_produit" >
                                             <option value="">Sélectionnez...</option>
                                             <option value="documents">Documents</option>
                                             <option value="vetements">Vêtements</option>
@@ -149,7 +149,7 @@
                                     
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Type de Cargaison <span class="text-red-500">*</span></label>
-                                        <select class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="type_cargaison" required>
+                                        <select class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="type_cargaison" >
                                             <option value="">Sélectionnez...</option>
                                             <option value="maritime">Maritime (Moins cher)</option>
                                             <option value="aerienne">Aérienne (Plus rapide)</option>

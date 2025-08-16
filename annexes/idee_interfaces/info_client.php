@@ -121,19 +121,19 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Nom <span class="text-red-500">*</span></label>
-                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="expediteur_nom" required>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="expediteur_nom" >
                                         <div class="text-xs text-red-500 mt-1 hidden" id="nom-error">Ce champ est obligatoire</div>
                                     </div>
                                     
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Prénom <span class="text-red-500">*</span></label>
-                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="expediteur_prenom" required>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="expediteur_prenom" >
                                         <div class="text-xs text-red-500 mt-1 hidden" id="prenom-error">Ce champ est obligatoire</div>
                                     </div>
                                     
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Téléphone <span class="text-red-500">*</span></label>
-                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="expediteur_telephone" required>
+                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 transition-colors" name="expediteur_telephone" >
                                         <div class="text-xs text-gray-500 mt-1">Format: +221 XX XXX XX XX</div>
                                         <div class="text-xs text-red-500 mt-1 hidden" id="telephone-error">Numéro de téléphone invalide</div>
                                     </div>
@@ -147,7 +147,7 @@
                                     
                                     <div class="flex flex-col col-span-1 md:col-span-2">
                                         <label class="font-medium text-gray-700 mb-2">Adresse Complète <span class="text-red-500">*</span></label>
-                                        <textarea class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 min-h-[100px] transition-colors" name="expediteur_adresse" required></textarea>
+                                        <textarea class="border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700 min-h-[100px] transition-colors" name="expediteur_adresse" ></textarea>
                                         <div class="text-xs text-gray-500 mt-1">Adresse complète avec quartier, ville, pays</div>
                                         <div class="text-xs text-red-500 mt-1 hidden" id="adresse-error">Ce champ est obligatoire</div>
                                     </div>

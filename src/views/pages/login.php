@@ -33,16 +33,17 @@
                 <h2 class="text-2xl font-bold text-blue-900 mb-2">Connexion Vous</h2>
                 <p class="text-gray-500 text-center">Accédez à votre espace de gestion</p>
             </div>
+            <div id="message" class="mt-4 text-center text-red-600 font-semibold"></div>
             <form id="loginForm" method="post" action="/login" class="space-y-6">
                 <div>
                     <label for="login" class="block text-sm font-medium text-gray-700 mb-2">Nom d'utilisateur</label>
                     <input type="text" id="login" name="login"  autocomplete="username"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre identifiant" required>
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre identifiant" >
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
                     <input type="password" id="password" name="password"  autocomplete="current-password"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre mot de passe" required>
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-blue-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Votre mot de passe" >
                 </div>
                 <div class="flex items-center justify-between ">
                     <label class="flex items-center text-sm text-gray-600">
@@ -52,7 +53,7 @@
                     <a href="#" class="text-blue-900 hover:underline text-sm font-medium">Mot de passe oublié ?</a>
                 </div>
                 <button type="submit" id="connect" class="w-[250px] py-3 rounded-lg bg-blue-900 ml-[100px] hover:bg-blue-900 text-white font-semibold text-lg shadow flex items-center justify-center gap-2 transition">
-                    <i class="fas fa-sign-in-alt"></i> <a href="/dashboard">Se connecter</a>
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
                 </button>
             </form>
             <!-- <div class="mt-8 text-center text-sm text-gray-500">
@@ -86,4 +87,5 @@
 </body>
 
 </html>
-<script src="../../../data/dist/login.js"> </script>
+<script src="/dist/controllers/GestionnaireControlleur.js"></script>
+

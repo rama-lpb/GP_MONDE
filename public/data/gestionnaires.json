@@ -7,7 +7,7 @@
     "adresse": "Dakar",
     "email": "rama@odc.sn",
     "login": "rama",
-    "motDePasse": "passer"
+    "password": "passer"
   },
   {
     "id": 2,
@@ -17,6 +17,6 @@
     "adresse": "Dakar",
     "email": "admin@odc.sn",
     "login": "admin",
-    "motDePasse": "passer"
+    "password": "passer"
   }
 ]

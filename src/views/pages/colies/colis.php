@@ -158,17 +158,17 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="flex flex-col mb-4">
                                         <label class="font-medium text-gray-700 mb-2">Nom <span class="text-red-500">*</span></label>
-                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="expediteur_nom" required>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="expediteur_nom" >
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Ce champ est obligatoire</div>
                                     </div>
                                     <div class="flex flex-col mb-4">
                                         <label class="font-medium text-gray-700 mb-2">Prénom <span class="text-red-500">*</span></label>
-                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="expediteur_prenom" required>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="expediteur_prenom" >
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Ce champ est obligatoire</div>
                                     </div>
                                     <div class="flex flex-col mb-4">
                                         <label class="font-medium text-gray-700 mb-2">Téléphone <span class="text-red-500">*</span></label>
-                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="expediteur_telephone" required placeholder="+221 XX XXX XX XX">
+                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="expediteur_telephone"  placeholder="+221 XX XXX XX XX">
                                         <div class="text-xs text-gray-500 mt-1">Format: +221 XX XXX XX XX</div>
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Numéro de téléphone invalide</div>
                                     </div>
@@ -179,7 +179,7 @@
                                     </div>
                                     <div class="flex flex-col mb-4 col-span-full">
                                         <label class="font-medium text-gray-700 mb-2">Adresse Complète <span class="text-red-500">*</span></label>
-                                        <textarea class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all min-h-[100px]" name="expediteur_adresse" required placeholder="Adresse complète avec quartier, ville, pays..."></textarea>
+                                        <textarea class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all min-h-[100px]" name="expediteur_adresse"  placeholder="Adresse complète avec quartier, ville, pays..."></textarea>
                                         <div class="text-xs text-gray-500 mt-1">Adresse complète avec quartier, ville, pays</div>
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Ce champ est obligatoire</div>
                                     </div>
@@ -204,14 +204,14 @@
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Nombre de Colis <span class="text-red-500">*</span></label>
                                         <input type="number" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
-                                               name="nombre_colis" min="1" max="10" value="1" required onchange="generateColisInputs()">
+                                               name="nombre_colis" min="1" max="10" value="1"  onchange="generateColisInputs()">
                                         <div class="text-xs text-gray-500 mt-1">Maximum 10 colis par envoi</div>
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Minimum 1 colis, maximum 10</div>
                                     </div>
                                     <div class="flex flex-col">
                                         <label class="font-medium text-gray-700 mb-2">Type de Cargaison <span class="text-red-500">*</span></label>
                                         <select class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
-                                                name="type_cargaison" required onchange="updatePricing()">
+                                                name="type_cargaison"  onchange="updatePricing()">
                                             <option value="">Sélectionnez...</option>
                                             <option value="maritime">🚢 Maritime (500 FCFA/kg - 7-10 jours)</option>
                                             <option value="aerienne">✈️ Aérienne (1200 FCFA/kg - 2-3 jours)</option>
@@ -270,17 +270,17 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="flex flex-col mb-4">
                                         <label class="font-medium text-gray-700 mb-2">Nom <span class="text-red-500">*</span></label>
-                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="destinataire_nom" required>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="destinataire_nom" >
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Ce champ est obligatoire</div>
                                     </div>
                                     <div class="flex flex-col mb-4">
                                         <label class="font-medium text-gray-700 mb-2">Prénom <span class="text-red-500">*</span></label>
-                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="destinataire_prenom" required>
+                                        <input type="text" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="destinataire_prenom" >
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Ce champ est obligatoire</div>
                                     </div>
                                     <div class="flex flex-col mb-4">
                                         <label class="font-medium text-gray-700 mb-2">Téléphone <span class="text-red-500">*</span></label>
-                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="destinataire_telephone" required placeholder="+221 XX XXX XX XX">
+                                        <input type="tel" class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" name="destinataire_telephone"  placeholder="+221 XX XXX XX XX">
                                         <div class="text-xs text-gray-500 mt-1">Le destinataire recevra le code de suivi par SMS</div>
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Numéro de téléphone invalide</div>
                                     </div>
@@ -291,7 +291,7 @@
                                     </div>
                                     <div class="flex flex-col mb-4 col-span-full">
                                         <label class="font-medium text-gray-700 mb-2">Adresse de Livraison <span class="text-red-500">*</span></label>
-                                        <textarea class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all min-h-[100px]" name="destinataire_adresse" required placeholder="Adresse complète où le destinataire récupérera le colis..."></textarea>
+                                        <textarea class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all min-h-[100px]" name="destinataire_adresse"  placeholder="Adresse complète où le destinataire récupérera le colis..."></textarea>
                                         <div class="text-xs text-gray-500 mt-1">Adresse complète où le destinataire récupérera le colis</div>
                                         <div class="text-xs text-red-500 mt-1 hidden form-error">Ce champ est obligatoire</div>
                                     </div>
@@ -499,7 +499,7 @@
 
         // Configuration de la validation
         function setupValidation() {
-            const inputs = document.querySelectorAll('input[required], textarea[required], select[required]');
+            const inputs = document.querySelectorAll('input[], textarea[], select[]');
             inputs.forEach(input => {
                 input.addEventListener('blur', validateField);
                 input.addEventListener('input', clearFieldError);
@@ -521,7 +521,7 @@
             let isValid = true;
             let errorMessage = '';
 
-            if (field.hasAttribute('required') && !value) {
+            if (field.hasAttribute('') && !value) {
                 isValid = false;
                 errorMessage = 'Ce champ est obligatoire';
             } else if (field.type === 'email' && value && !isValidEmail(value)) {
@@ -600,7 +600,7 @@
                             <label class="font-medium text-gray-700 mb-2">Poids (kg) <span class="text-red-500">*</span></label>
                             <input type="number" step="0.1" min="0.1" max="1000" 
                                    class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
-                                   name="colis_${i}_poids" required onchange="updatePricing()">
+                                   name="colis_${i}_poids"  onchange="updatePricing()">
                             <div class="text-xs text-gray-500 mt-1">Maximum 1000 kg</div>
                         </div>
                         <div class="flex flex-col">
@@ -625,7 +625,7 @@
                             <label class="font-medium text-gray-700 mb-2">Description du contenu <span class="text-red-500">*</span></label>
                             <input type="text" 
                                    class="border-2 border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all" 
-                                   name="colis_${i}_description" required placeholder="Ex: Vêtements, Électronique, Documents...">
+                                   name="colis_${i}_description"  placeholder="Ex: Vêtements, Électronique, Documents...">
                         </div>
                     </div>
                 `;
@@ -776,10 +776,10 @@
         // Validation de l'étape courante
         function validateCurrentStep() {
             const currentStepElement = document.getElementById(`step${currentStep}`);
-            const requiredFields = currentStepElement.querySelectorAll('[required]');
+            const Fields = currentStepElement.querySelectorAll('[]');
             let isValid = true;
             
-            requiredFields.forEach(field => {
+            Fields.forEach(field => {
                 if (!validateField({ target: field })) {
                     isValid = false;
                 }

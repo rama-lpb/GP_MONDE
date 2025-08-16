@@ -234,8 +234,8 @@ function validateStep(step) {
     stepElement.querySelectorAll('input, select, textarea').forEach(input => {
         input.classList.remove('border-red-500', 'ring-red-200');
     });
-    const requiredInputs = stepElement.querySelectorAll('[required]');
-    requiredInputs.forEach(input => {
+    const Inputs = stepElement.querySelectorAll('[]');
+    Inputs.forEach(input => {
         if (!input.value.trim()) {
             isValid = false;
             input.classList.add('border-red-500', 'ring-red-200', 'ring-2');
