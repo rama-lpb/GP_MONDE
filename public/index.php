@@ -11,5 +11,6 @@ $router->get('/cargaisons/new', 'newcargaison');
 $router->get('/colis', 'colies/colis');
 $router->get('/details', 'colies/details');
 $router->get('/destinataire', 'colies/destinataire');
+$router->get('/cargaisons/details', 'cargaison_details');
 
 $router->dispatch();

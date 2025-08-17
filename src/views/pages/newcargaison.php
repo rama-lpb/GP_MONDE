@@ -104,43 +104,68 @@
                     </div>
                     <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded font-semibold">Créer</button>
                     <div id="cargaisonMessage" class="mt-4 text-center text-red-600 font-semibold"></div>
+                    <!-- Pop-up de succès -->
+                    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                            <h2 class="text-xl font-bold text-green-700 mb-4">Succès !</h2>
+                            <p class="mb-6">Cargaison créée avec succès !</p>
+                            <button onclick="document.getElementById('successModal').classList.add('hidden')" class="px-6 py-2 bg-blue-900 text-white rounded font-semibold">Fermer</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </main>
     </div>
-    <script>
-    /* document.getElementById('cargaisonForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const data = {
-            type: document.getElementById('type').value,
-            lieuDepart: document.getElementById('lieuDepart').value,
-            lieuArrive: document.getElementById('lieuArrive').value,
-            dateDepart: document.getElementById('dateDepart').value,
-            dateArrive: document.getElementById('dateArrive').value,
-            poidsMax: document.getElementById('poidsMax').value,
-            distance: document.getElementById('distance').value
-        };
-        // À adapter selon ton backend
-        fetch('/api/cargaisons', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(result => {
-            const msg = document.getElementById('cargaisonMessage');
-            if(result.success) {
-                msg.textContent = "Cargaison créée avec succès !";
-                msg.style.color = "green";
-                document.getElementById('cargaisonForm').reset();
-            } else {
-                msg.textContent = result.message || "Erreur lors de la création.";
-                msg.style.color = "red";
-            }
-        });
-    }); */
-    </script>
+    
 </body>
-<script src="/dist/controllers/CargaisonController.js"></script>
-
+<!-- <script src="/dist/controllers/CargaisonController.js"></script>
+ -->
 </html>
+<?php
+$jsonFile = __DIR__ . '/../../../public/data/cargaison.json';
+
+if (file_exists($jsonFile)) {
+    // Le fichier existe
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = [
+            'id' => time(),
+            'numero' => time(),
+            'poidsMax' => floatval($_POST['poidsMax']),
+            'colis' => [],
+            'montantTotal' => 0,
+            'lieuDepart' => $_POST['lieuDepart'],
+            'dateDepart' => $_POST['dateDepart'],
+            'lieuArrive' => $_POST['lieuArrive'],
+            'dateArrive' => $_POST['dateArrive'],
+            'etatAvancement' => 'en-attente',
+            'etatGlobal' => 'ouvert',
+            'typeCargaison' => $_POST['type'],
+            'codeCargaison' => 'CG-' . time(),
+            'distance' => floatval($_POST['distance'])
+        ];
+    
+        $jsonFile = __DIR__ . '/../../../public/data/cargaison.json';
+        $cargaisons = [];
+        if (file_exists($jsonFile)) {
+            $cargaisons = json_decode(file_get_contents($jsonFile), true) ?: [];
+        }
+        $cargaisons[] = $data;
+        file_put_contents($jsonFile, json_encode($cargaisons, JSON_PRETTY_PRINT));
+        $success = true;
+        header("Location: newcargaison.php?success=1");
+        exit;
+    }
+} 
+else {
+    echo ("aahhhh virginie tu te debrouille ");
+}
+
+?>
+<?php if (!empty($success)): ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('successModal').classList.remove('hidden');
+    });
+</script>
+
+<?php endif; ?>

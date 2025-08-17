@@ -1,3 +1,34 @@
 [
-    
+    {
+        "id": 1755405944,
+        "numero": 1755405944,
+        "poidsMax": 30,
+        "colis": [],
+        "montantTotal": 0,
+        "lieuDepart": "dakar",
+        "dateDepart": "2025-08-01",
+        "lieuArrive": "paris",
+        "dateArrive": "2025-08-22",
+        "etatAvancement": "en-attente",
+        "etatGlobal": "ouvert",
+        "typeCargaison": "routiere",
+        "codeCargaison": "CG-1755405944",
+        "distance": 20
+    },
+    {
+        "id": 1755439881,
+        "numero": 1755439881,
+        "poidsMax": 100,
+        "colis": [],
+        "montantTotal": 0,
+        "lieuDepart": "dakar",
+        "dateDepart": "2025-08-02",
+        "lieuArrive": "maroc",
+        "dateArrive": "2025-08-23",
+        "etatAvancement": "en-attente",
+        "etatGlobal": "ouvert",
+        "typeCargaison": "aerienne",
+        "codeCargaison": "CG-1755439881",
+        "distance": 1200
+    }
 ]

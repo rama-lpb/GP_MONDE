@@ -94,11 +94,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-4">
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-gray-500 mb-2">Numéro de Cargaison</label>
-                            <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" placeholder="Ex: MAR-2024-001">
+                            <input type="text" class="filter-numero border border-gray-300 rounded-lg px-3 py-2" placeholder="Ex: MAR-2024-001">
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-gray-500 mb-2">Type de Cargaison</label>
-                            <select class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700">
+                            <select class="filter-type border border-gray-300 rounded-lg px-3 py-2">
                                 <option value="">Tous les types</option>
                                 <option value="maritime">Maritime</option>
                                 <option value="aerienne">Aérienne</option>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-gray-500 mb-2">État Global</label>
-                            <select class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700">
+                            <select class="filter-etat-global border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700">
                                 <option value="">Tous les états</option>
                                 <option value="ouvert">Ouvert</option>
                                 <option value="ferme">Fermé</option>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-gray-500 mb-2">État d'Avancement</label>
-                            <select class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700">
+                            <select class="filter-etat-avancement border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700">
                                 <option value="">Tous</option>
                                 <option value="en-attente">En Attente</option>
                                 <option value="en-cours">En Cours</option>
@@ -125,11 +125,11 @@
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-gray-500 mb-2">Lieu de Départ</label>
-                            <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" placeholder="Ex: Dakar">
+                            <input type="text" class="filter-lieu-depart border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" placeholder="Ex: Dakar">
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-gray-500 mb-2">Lieu d'Arrivée</label>
-                            <input type="text" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" placeholder="Ex: Paris">
+                            <input type="text" class="filter-lieu-arrive border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-700" placeholder="Ex: Paris">
                         </div>
                     </div>
                     <div class="flex gap-3">
@@ -172,308 +172,90 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Exemple de ligne, à dupliquer dynamiquement -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 border-b border-gray-100">MAR-2024-001</></td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-100 text-blue-600 text-xs font-semibold">
-                                            <i class="fas fa-ship"></i>
-                                            Maritime
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            Dakar → Marseille</><br>
-                                            <small class="text-gray-500">4,250 km</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            2,450 kg</><br>
-                                            <small class="text-gray-500">/ 5,000 kg</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        45</> colis
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        1,245,000 FCFA</>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-100 text-red-400 text-xs font-semibold">
-                                            <i class="fas fa-lock"></i>
-                                            Fermé
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-100 text-blue-600 text-xs font-semibold">
-                                            <i class="fas fa-clock"></i>
-                                            En Cours
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div class="relative group">
-                                            <button class="flex items-center justify-center w-6 h-6" aria-label="Actions">
-                                                <i class="fas fa-ellipsis-v text-gray-400"></i>
-                                            </button>
-                                            <div class="absolute right-0 top-7 z-10 hidden group-hover:flex flex-col min-w-[120px] bg-white border border-gray-200 rounded shadow-lg">
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="viewCargaison('MAR-2024-001')">
-                                                    <i class="fas fa-eye text-gray-500"></i>
-                                                    Détails
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="editCargaison('MAR-2024-001')">
-                                                    <i class="fas fa-edit text-gray-500"></i>
-                                                    Modifier
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-red-500 hover:bg-red-50 w-full text-left" onclick="confirmDelete('MAR-2024-001')">
-                                                    <i class="fas fa-trash text-red-400"></i>
-                                                    Supprimer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 border-b border-gray-100">AER-2024-015</></td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-100 text-red-400 text-xs font-semibold">
-                                            <i class="fas fa-plane"></i>
-                                            Aérienne
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            Dakar → Paris</><br>
-                                            <small class="text-gray-500">4,128 km</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            890 kg</><br>
-                                            <small class="text-gray-500">/ 1,200 kg</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        23</> colis
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        567,800 FCFA</>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-100 text-green-600 text-xs font-semibold">
-                                            <i class="fas fa-unlock"></i>
-                                            Ouvert
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-blue-700 text-xs font-semibold">
-                                            <i class="fas fa-clock"></i>
-                                            En Attente
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div class="relative group">
-                                            <button class="flex items-center justify-center w-6 h-6" aria-label="Actions">
-                                                <i class="fas fa-ellipsis-v text-gray-400"></i>
-                                            </button>
-                                            <div class="absolute right-0 top-7 z-10 hidden group-hover:flex flex-col min-w-[120px] bg-white border border-gray-200 rounded shadow-lg">
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="viewCargaison('AER-2024-015')">
-                                                    <i class="fas fa-eye text-gray-500"></i>
-                                                    Détails
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="editCargaison('AER-2024-015')">
-                                                    <i class="fas fa-edit text-gray-500"></i>
-                                                    Modifier
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-red-500 hover:bg-red-50 w-full text-left" onclick="confirmDelete('AER-2024-015')">
-                                                    <i class="fas fa-trash text-red-400"></i>
-                                                    Supprimer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 border-b border-gray-100">ROT-2024-008</></td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-100 text-green-600 text-xs font-semibold">
-                                            <i class="fas fa-truck"></i>
-                                            Routière
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            Dakar → Bamako</><br>
-                                            <small class="text-gray-500">1,200 km</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            3,200 kg</><br>
-                                            <small class="text-gray-500">/ 8,000 kg</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        67</> colis
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        890,500 FCFA</>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-100 text-green-600 text-xs font-semibold">
-                                            <i class="fas fa-unlock"></i>
-                                            Ouvert
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-blue-700 text-xs font-semibold">
-                                            <i class="fas fa-clock"></i>
-                                            En Attente
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div class="relative group">
-                                            <button class="flex items-center justify-center w-6 h-6" aria-label="Actions">
-                                                <i class="fas fa-ellipsis-v text-gray-400"></i>
-                                            </button>
-                                            <div class="absolute right-0 top-7 z-10 hidden group-hover:flex flex-col min-w-[120px] bg-white border border-gray-200 rounded shadow-lg">
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="viewCargaison('ROT-2024-008')">
-                                                    <i class="fas fa-eye text-gray-500"></i>
-                                                    Détails
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="editCargaison('ROT-2024-008')">
-                                                    <i class="fas fa-edit text-gray-500"></i>
-                                                    Modifier
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-red-500 hover:bg-red-50 w-full text-left" onclick="confirmDelete('ROT-2024-008')">
-                                                    <i class="fas fa-trash text-red-400"></i>
-                                                    Supprimer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 border-b border-gray-100">MAR-2024-002</></td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-100 text-blue-600 text-xs font-semibold">
-                                            <i class="fas fa-ship"></i>
-                                            Maritime
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            Dakar → Le Havre</><br>
-                                            <small class="text-gray-500">4,100 km</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            4,800 kg</><br>
-                                            <small class="text-gray-500">/ 5,000 kg</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        89</> colis
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        2,340,000 FCFA</>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-100 text-red-400 text-xs font-semibold">
-                                            <i class="fas fa-lock"></i>
-                                            Fermé
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-100 text-green-600 text-xs font-semibold">
-                                            <i class="fas fa-check-circle"></i>
-                                            Arrivé
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div class="relative group">
-                                            <button class="flex items-center justify-center w-6 h-6" aria-label="Actions">
-                                                <i class="fas fa-ellipsis-v text-gray-400"></i>
-                                            </button>
-                                            <div class="absolute right-0 top-7 z-10 hidden group-hover:flex flex-col min-w-[120px] bg-white border border-gray-200 rounded shadow-lg">
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="viewCargaison('MAR-2024-002')">
-                                                    <i class="fas fa-eye text-gray-500"></i>
-                                                    Détails
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="editCargaison('MAR-2024-002')">
-                                                    <i class="fas fa-edit text-gray-500"></i>
-                                                    Modifier
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-red-500 hover:bg-red-50 w-full text-left" onclick="confirmDelete('MAR-2024-002')">
-                                                    <i class="fas fa-trash text-red-400"></i>
-                                                    Supprimer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 border-b border-gray-100">AER-2024-016</></td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-100 text-red-400 text-xs font-semibold">
-                                            <i class="fas fa-plane"></i>
-                                            Aérienne
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            Dakar → Madrid</><br>
-                                            <small class="text-gray-500">2,850 km</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div>
-                                            1,100 kg</><br>
-                                            <small class="text-gray-500">/ 1,200 kg</small>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        34</> colis
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        745,600 FCFA</>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-100 text-red-400 text-xs font-semibold">
-                                            <i class="fas fa-lock"></i>
-                                            Fermé
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-gray-700 text-xs font-semibold">
-                                            <i class="fas fa-flag-checkered"></i>
-                                            Terminé
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-100">
-                                        <div class="relative group">
-                                            <button class="flex items-center justify-center w-6 h-6" aria-label="Actions">
-                                                <i class="fas fa-ellipsis-v text-gray-400"></i>
-                                            </button>
-                                            <div class="absolute right-0 top-7 z-10 hidden group-hover:flex flex-col min-w-[120px] bg-white border border-gray-200 rounded shadow-lg">
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="viewCargaison('AER-2024-016')">
-                                                    <i class="fas fa-eye text-gray-500"></i>
-                                                    Détails
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="editCargaison('AER-2024-016')">
-                                                    <i class="fas fa-edit text-gray-500"></i>
-                                                    Modifier
-                                                </button>
-                                                <button class="flex items-center gap-2 px-4 py-2 text-xs text-red-500 hover:bg-red-50 w-full text-left" onclick="confirmDelete('MAR-2024-001')">
-                                                    <i class="fas fa-trash text-red-400"></i>
-                                                    Supprimer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+<?php
+$jsonFile = __DIR__ . '/../../../public/data/cargaison.json';
+$cargaisons = [];
+if (file_exists($jsonFile)) {
+    $cargaisons = json_decode(file_get_contents($jsonFile), true) ?: [];
+}
+?>
+<?php foreach ($cargaisons as $cargaison): ?>
+    <tr class="hover:bg-gray-50"
+        data-numero="<?= htmlspecialchars($cargaison['codeCargaison']) ?>"
+        data-type="<?= htmlspecialchars($cargaison['typeCargaison']) ?>"
+        data-etat-global="<?= htmlspecialchars($cargaison['etatGlobal']) ?>"
+        data-etat-avancement="<?= htmlspecialchars($cargaison['etatAvancement']) ?>"
+        data-lieu-depart="<?= htmlspecialchars($cargaison['lieuDepart']) ?>"
+        data-lieu-arrive="<?= htmlspecialchars($cargaison['lieuArrive']) ?>"
+    >
+        <td class="px-6 py-4 border-b border-gray-100"><?= htmlspecialchars($cargaison['codeCargaison']) ?></td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-100 text-blue-600 text-xs font-semibold">
+                <?php if ($cargaison['typeCargaison'] === 'maritime'): ?>
+                    <i class="fas fa-ship"></i> Maritime
+                <?php elseif ($cargaison['typeCargaison'] === 'aerienne'): ?>
+                    <i class="fas fa-plane"></i> Aérienne
+                <?php else: ?>
+                    <i class="fas fa-truck"></i> Routière
+                <?php endif; ?>
+            </span>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <div>
+                <?= htmlspecialchars($cargaison['lieuDepart']) ?> → <?= htmlspecialchars($cargaison['lieuArrive']) ?><br>
+                <small class="text-gray-500"><?= htmlspecialchars($cargaison['distance']) ?> km</small>
+            </div>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <div>
+                0 kg<br>
+                <small class="text-gray-500">/ <?= htmlspecialchars($cargaison['poidsMax']) ?> kg</small>
+            </div>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <?= count($cargaison['colis']) ?> colis
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <?= number_format($cargaison['montantTotal'], 0, ',', ' ') ?> FCFA
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-<?= $cargaison['etatGlobal'] === 'ouvert' ? 'green-100 text-green-600' : 'red-100 text-red-400' ?> text-xs font-semibold">
+                <i class="fas fa-<?= $cargaison['etatGlobal'] === 'ouvert' ? 'unlock' : 'lock' ?>"></i>
+                <?= ucfirst($cargaison['etatGlobal']) ?>
+            </span>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-blue-700 text-xs font-semibold">
+                <i class="fas fa-clock"></i>
+                <?= ucfirst($cargaison['etatAvancement']) ?>
+            </span>
+        </td>
+        <td class="px-6 py-4 border-b border-gray-100">
+            <div class="relative">
+        <button class="flex items-center justify-center w-6 h-6" aria-label="Actions"
+            onclick="toggleActionsMenu('actions-<?= htmlspecialchars($cargaison['codeCargaison']) ?>')">
+            <i class="fas fa-ellipsis-v text-gray-400"></i>
+        </button>
+        <div id="actions-<?= htmlspecialchars($cargaison['codeCargaison']) ?>"
+            class="absolute right-0 top-7 z-10 hidden flex-col min-w-[120px] bg-white border border-gray-200 rounded shadow-lg">
+            <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="window.location.href='/cargaisons/details?code=<?= htmlspecialchars($cargaison['codeCargaison']) ?>'">
+                <i class="fas fa-eye text-gray-500"></i>
+                Détails
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 w-full text-left" onclick="editCargaison('<?= htmlspecialchars($cargaison['codeCargaison']) ?>')">
+                <i class="fas fa-edit text-gray-500"></i>
+                Modifier
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 text-xs text-red-500 hover:bg-red-50 w-full text-left" onclick="confirmDelete('<?= htmlspecialchars($cargaison['codeCargaison']) ?>')">
+                <i class="fas fa-trash text-red-400"></i>
+                Supprimer
+            </button>
+        </div>
+    </div>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</tbody>
                         </table>
                     </div>
                     
@@ -561,29 +343,32 @@
 
         // Fonctions de filtrage
         function applyFilters() {
-            const filters = {
-                numero: document.querySelector('.filter-input[placeholder*="MAR-2024-001"]').value,
-                type: document.querySelector('select.filter-select').value,
-                etatGlobal: document.querySelectorAll('select.filter-select')[1].value,
-                etatAvancement: document.querySelectorAll('select.filter-select')[2].value,
-                lieuDepart: document.querySelectorAll('.filter-input')[1].value,
-                lieuArrivee: document.querySelectorAll('.filter-input')[2].value
-            };
+            const numero = document.querySelector('.filter-numero').value.trim().toLowerCase();
+            const type = document.querySelector('.filter-type').value;
+            const etatGlobal = document.querySelector('.filter-etat-global').value;
+            const etatAvancement = document.querySelector('.filter-etat-avancement').value;
+            const lieuDepart = document.querySelector('.filter-lieu-depart').value.trim().toLowerCase();
+            const lieuArrive = document.querySelector('.filter-lieu-arrive').value.trim().toLowerCase();
 
-            console.log('Applying filters:', filters);
-            
-            // Ici vous implémenteriez la logique de filtrage
-            // Par exemple, faire une requête AJAX vers votre API PHP
-            
-            // Simulation d'un filtrage côté client
-            filterTable(filters);
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                let show = true;
+                if (numero && !row.dataset.numero.toLowerCase().includes(numero)) show = false;
+                if (type && row.dataset.type !== type) show = false;
+                if (etatGlobal && row.dataset.etatGlobal !== etatGlobal) show = false;
+                if (etatAvancement && row.dataset.etatAvancement !== etatAvancement) show = false;
+                if (lieuDepart && !row.dataset.lieuDepart.toLowerCase().includes(lieuDepart)) show = false;
+                if (lieuArrive && !row.dataset.lieuArrive.toLowerCase().includes(lieuArrive)) show = false;
+                row.style.display = show ? '' : 'none';
+            });
         }
 
         function resetFilters() {
-            document.querySelectorAll('.filter-input').forEach(input => input.value = '');
-            document.querySelectorAll('.filter-select').forEach(select => select.selectedIndex = 0);
-            
-            // Réafficher toutes les lignes
+            document.querySelector('.filter-numero').value = '';
+            document.querySelector('.filter-type').value = '';
+            document.querySelector('.filter-etat-global').value = '';
+            document.querySelector('.filter-etat-avancement').value = '';
+            document.querySelector('.filter-lieu-depart').value = '';
+            document.querySelector('.filter-lieu-arrive').value = '';
             document.querySelectorAll('.data-table tbody tr').forEach(row => {
                 row.style.display = '';
             });
@@ -719,11 +504,28 @@
             rows.forEach(row => table.appendChild(row));
         }
 
-        // Auto-refresh toutes les 60 secondes
         setInterval(() => {
             console.log('Auto-refreshing cargaisons data...');
-            // Ici vous pourriez faire une requête AJAX pour actualiser les données
         }, 60000);
+
+        function toggleActionsMenu(menuId) {
+    // Ferme tous les autres menus
+    document.querySelectorAll('[id^="actions-"]').forEach(menu => {
+        if (menu.id !== menuId) menu.classList.add('hidden');
+    });
+    // Ouvre ou ferme le menu ciblé
+    const menu = document.getElementById(menuId);
+    if (menu) menu.classList.toggle('hidden');
+}
+
+// Ferme le menu si on clique ailleurs
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.relative')) {
+        document.querySelectorAll('[id^="actions-"]').forEach(menu => {
+            menu.classList.add('hidden');
+        });
+    }
+});
     </script>
 </body>
 </html>

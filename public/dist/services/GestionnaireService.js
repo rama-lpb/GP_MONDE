@@ -6,10 +6,10 @@ class GestionnaireService {
     constructor() {
         this.repo = new GestionnaireRepository_1.GestionnaireRepository();
     }
-    getLogin(login, motDePasse) {
+    getLogin(login, password) {
         const gestionnaires = this.repo.findAll();
         console.log(gestionnaires);
-        const found = gestionnaires.find(g => g.login === login && g.motDePasse === motDePasse);
+        const found = gestionnaires.find(g => g.login === login && g.password === password);
         return found || null;
     }
 }
